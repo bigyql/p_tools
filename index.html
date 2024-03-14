@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>胖乖生活取Token</title>
+    <title>群友自取 Token</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/axios.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <h2>胖乖生活取Token</h2>
+    <h2>群友自取 Token</h2>
     <label for="phoneInput">手机号:</label>
     <input type="text" id="phoneInput" name="phone">
     <label for="verifyInput">验证码:</label>
@@ -42,9 +42,9 @@
 
         const script = document.createElement('script');
         if (choice === 'h5') {
-            script.src = 'h5.js';
+            script.src = 'js/h5.js';
         } else if (choice === 'app') {
-            script.src = 'app.js';
+            script.src = 'js/app.js';
         }
 
         const oldScript = document.querySelector('body script[src*=".js"]:not([src*="axios"])');
