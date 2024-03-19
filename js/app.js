@@ -87,8 +87,9 @@ async function verifyCode() {
 
 async function copy() {
     try {
+        const phoneInputFour = document.getElementById("phoneInput").slice(-4);
         const responseDisplay = document.getElementById("responseDisplay");
-        await navigator.clipboard.writeText(responseDisplay.textContent);
+        await navigator.clipboard.writeText(phoneInputFour+responseDisplay.textContent);
         alert("复制Token成功！");
     } catch (err) {
         console.error('复制Token失败:', err);
