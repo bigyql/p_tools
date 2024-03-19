@@ -70,7 +70,7 @@ function startTimer() {
 async function verifyCode() {
     const phoneInput = document.getElementById("phoneInput").value;
     const verifyInput = document.getElementById("verifyInput").value;
-    const phoneInputFour = document.getElementById("phoneInput").slice(-4);
+    const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
     try {
         const body = new URLSearchParams({ channel: "h5", phone: phoneInput, verify: verifyInput });
         const response = await axios.post(API_USER_REG, body.toString(), { headers: axiosHeaders });
