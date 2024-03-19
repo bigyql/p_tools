@@ -101,7 +101,7 @@ async function verifyCode() {
 
     try {
         const response = await axios.post(API_USER_REG, formData, { headers: axiosHeaders });
-        const phoneInputFour = document.getElementById("phoneInput").slice(-4);
+        const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
         if (response.data.code === 0) {
             
             document.getElementById("responseDisplay").textContent = phoneInputFour + response.data.data.token;
