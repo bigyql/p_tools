@@ -75,7 +75,7 @@ async function verifyCode() {
         const body = new URLSearchParams({ channel: "h5", phone: phoneInput, verify: verifyInput });
         const response = await axios.post(API_USER_REG, body.toString(), { headers: axiosHeaders });
         if (response.data.code === 0) {
-            document.getElementById("responseDisplay").textContent = phoneInputFour + response.data.data.token;
+            document.getElementById("responseDisplay").textContent = phoneInputFour+ "#" + response.data.data.token;
             alert("登录成功！");
         } else {
             alert("登录失败：" + response.data.msg);
