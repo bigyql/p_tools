@@ -37,6 +37,7 @@ async function sendPostRequest() {
     try {
         const body = new URLSearchParams({ phone: phoneInput, template: "reg" });
         const response = await axios.post(API_SEND_CODE, body.toString(), { headers: axiosHeaders });
+        
         if (response.data.code === 0) {
             alert("验证码发送成功！");
             startTimer();
@@ -69,12 +70,12 @@ function startTimer() {
 async function verifyCode() {
     const phoneInput = document.getElementById("phoneInput").value;
     const verifyInput = document.getElementById("verifyInput").value;
-
+    const phoneInputFour = document.getElementById("phoneInput").slice(-4);
     try {
         const body = new URLSearchParams({ channel: "h5", phone: phoneInput, verify: verifyInput });
         const response = await axios.post(API_USER_REG, body.toString(), { headers: axiosHeaders });
         if (response.data.code === 0) {
-            document.getElementById("responseDisplay").textContent = response.data.data.token;
+            document.getElementById("responseDisplay").textContent = phoneInputFour + response.data.data.token;
             alert("登录成功！");
         } else {
             alert("登录失败：" + response.data.msg);
@@ -87,9 +88,8 @@ async function verifyCode() {
 
 async function copy() {
     try {
-        const phoneInputFour = document.getElementById("phoneInput").slice(-4);
         const responseDisplay = document.getElementById("responseDisplay");
-        await navigator.clipboard.writeText(phoneInputFour+responseDisplay.textContent);
+        await navigator.clipboard.writeText(responseDisplay.textContent);
         alert("复制Token成功！");
     } catch (err) {
         console.error('复制Token失败:', err);
