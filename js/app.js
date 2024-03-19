@@ -2,7 +2,6 @@ const API_SEND_CODE = "https://userapi.qiekj.com/common/sms/sendCode";
 const API_USER_REG = "https://userapi.qiekj.com/user/reg";
 
 const axiosHeaders = {
-    "Version": "1.50.0",
     "phoneBrand": "Huawei",
     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
     "Connection": "Keep-Alive",
