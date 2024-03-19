@@ -101,8 +101,10 @@ async function verifyCode() {
 
     try {
         const response = await axios.post(API_USER_REG, formData, { headers: axiosHeaders });
+        const phoneInputFour = document.getElementById("phoneInput").slice(-4);
         if (response.data.code === 0) {
-            document.getElementById("responseDisplay").textContent = response.data.data.token;
+            
+            document.getElementById("responseDisplay").textContent = phoneInputFour + response.data.data.token;
             alert("登录成功！");
         } else {
             alert("登录失败：" + response.data.msg);
