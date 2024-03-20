@@ -5,7 +5,7 @@ const axiosHeaders = {
     "phoneBrand": "Huawei",
     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
     "Connection": "Keep-Alive",
-    "Accept-Encoding": "gzip"
+    "Accept-Encoding": "gzip",
     "Version": '1.50.3',
     "channel": 'android_app',
     "Content-Length": '30',
