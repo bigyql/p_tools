@@ -122,12 +122,30 @@ async function verifyCode() {
 
 function copy() {
     const responseDisplay = document.getElementById("responseDisplay");
-    navigator.clipboard.writeText(responseDisplay.placeholder)
-        .then(() => {
-            alert("复制成功！");
-        })
-        .catch(err => {
-            console.error('复制失败:', err);
-            alert("复制失败！");
-        });
+    if (responseDisplay.placeholder === "等待登录"){
+        alert("复制个寂寞!");
+    }else {
+        navigator.clipboard.writeText(responseDisplay.placeholder)
+            .then(() => {
+                toggleQContent()
+                alert("复制成功！请加交流群");
+
+            })
+            .catch(err => {
+                console.error('复制失败:', err);
+                toggleQContent()
+                alert("复制失败！请加交流群");
+            });
+    }
+
+}
+
+
+function toggleQContent() {
+    var content = document.getElementById("mQm");
+    if (content.style.display === "none") {
+        content.style.display = "block";
+    } else {
+        content.style.display = "none";
+    }
 }
