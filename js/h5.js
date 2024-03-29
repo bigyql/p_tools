@@ -51,7 +51,7 @@ async function sendPostRequest() {
             'Referer': 'https://h5.qiekj.com/',
             'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'
         };
-        const response = await axios.post(API_SEND_CODE, formData, { headers: axiosHeaders });
+        const response = await axios.post(API_SEND_CODE, formData, {headers: axiosHeaders});
         if (response.data.code === 0) {
             alert("验证码发送成功！");
             startTimer();
@@ -84,40 +84,45 @@ function startTimer() {
 async function verifyCode() {
     const phoneInput = document.getElementById("phoneInput").value;
     const verifyInput = document.getElementById("verifyInput").value;
+    const sendBtn = document.querySelector("button[onclick='sendPostRequest()']");
+    if (sendBtn.textContent === "发送验证码") {
+        alert("未获取验证码, 禁止登录");
+    } else {
+        const formData = new FormData();
+        formData.append('channel', 'h5');
+        formData.append('phone', phoneInput);
+        formData.append('verify', verifyInput);
 
-    const formData = new FormData();
-    formData.append('channel', 'h5');
-    formData.append('phone', phoneInput);
-    formData.append('verify', verifyInput);
+        const axiosHeaders = {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "multipart/form-data",
+            "Origin": "https://h5.qiekj.com",
+            "Referer": "https://h5.qiekj.com/",
+            "User-Agent": UA(),
+            "X-Requested-With": "mark.via"
+        };
 
-    const axiosHeaders = {
-        "Accept": "application/json, text/plain, */*",
-        "Content-Type": "multipart/form-data",
-        "Origin": "https://h5.qiekj.com",
-        "Referer": "https://h5.qiekj.com/",
-        "User-Agent": UA(),
-        "X-Requested-With": "mark.via"
-    };
-
-    try {
-        const response = await axios.post(API_USER_REG, formData, { headers: axiosHeaders });
-        const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
-        if (response.data.code === 0) {
-            document.getElementById("responseDisplay").textContent = phoneInputFour+ "#" + response.data.data.token;
-            alert("登录成功！");
-        } else {
-            alert("登录失败：" + response.data.msg);
+        try {
+            const response = await axios.post(API_USER_REG, formData, {headers: axiosHeaders});
+            const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
+            if (response.data.code === 0) {
+                document.getElementById("responseDisplay").setAttribute("placeholder", phoneInputFour + "#" + response.data.data.token);
+                alert("登录成功！");
+            } else {
+                alert("登录失败：" + response.data.msg);
+            }
+        } catch (error) {
+            console.error('登录失败:', error);
+            alert("登录失败！");
         }
-    } catch (error) {
-        console.error('登录失败:', error);
-        alert("登录失败！");
     }
+
 }
 
 
 function copy() {
     const responseDisplay = document.getElementById("responseDisplay");
-    navigator.clipboard.writeText(responseDisplay.textContent)
+    navigator.clipboard.writeText(responseDisplay.placeholder)
         .then(() => {
             alert("复制成功！");
         })
