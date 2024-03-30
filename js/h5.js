@@ -134,7 +134,7 @@ function copy() {
             .catch(err => {
                 console.error('复制失败:', err);
                 toggleQContent()
-                alert("复制失败！请加交流群");
+                alert("复制失败！您的浏览器没有剪贴版权限,点击确定,手动复制, 请加交流群");
             });
     }
 
