@@ -106,7 +106,7 @@ async function verifyCode() {
             const response = await axios.post(API_USER_REG, formData, {headers: axiosHeaders});
             const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
             if (response.data.code === 0) {
-                document.getElementById("responseDisplay").setAttribute("placeholder", phoneInputFour + "#" + response.data.data.token);
+                document.getElementById("responseDisplay").value = phoneInputFour + "#" + response.data.data.token;
                 alert("登录成功！");
             } else {
                 alert("登录失败：" + response.data.msg);
@@ -122,10 +122,10 @@ async function verifyCode() {
 
 function copy() {
     const responseDisplay = document.getElementById("responseDisplay");
-    if (responseDisplay.placeholder === "等待登录"){
+    if (responseDisplay.value === "") {
         alert("复制个寂寞!");
-    }else {
-        navigator.clipboard.writeText(responseDisplay.placeholder)
+    } else {
+        navigator.clipboard.writeText(responseDisplay.value)
             .then(() => {
                 toggleQContent()
                 alert("复制成功！请加交流群");
