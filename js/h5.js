@@ -105,6 +105,7 @@ async function verifyCode() {
         try {
             const response = await axios.post(API_USER_REG, formData, {headers: axiosHeaders});
             if (response.data.code === 0) {
+                document.getElementById("responseDisplay").value = response.data.data.token;
                 alert("登录成功！");
             } else {
                 alert("登录失败：" + response.data.msg);
