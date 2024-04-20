@@ -70,12 +70,10 @@ function startTimer() {
 async function verifyCode() {
     const phoneInput = document.getElementById("phoneInput").value;
     const verifyInput = document.getElementById("verifyInput").value;
-    const phoneInputFour = document.getElementById("phoneInput").value.slice(-4);
     try {
         const body = new URLSearchParams({ channel: "h5", phone: phoneInput, verify: verifyInput });
         const response = await axios.post(API_USER_REG, body.toString(), { headers: axiosHeaders });
         if (response.data.code === 0) {
-            document.getElementById("responseDisplay").textContent = phoneInputFour+ "#" + response.data.data.token;
             alert("登录成功！");
         } else {
             alert("登录失败：" + response.data.msg);
